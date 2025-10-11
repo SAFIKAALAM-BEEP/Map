@@ -10,12 +10,98 @@
         body {
             background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
             min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 1000;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+
+        .music-player {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            z-index: 1000;
+            min-width: 200px;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #play-pause-btn {
+            background: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        #play-pause-btn:hover {
+            background: #ddd;
+            transform: scale(1.1);
+        }
+
+        #track-info {
+            font-size: 1rem;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 150px 40px 60px;
+            text-align: center;
+        }
+
+        .content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .content p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #e8f4f8;
+            margin-bottom: 25px;
+            text-align: left;
         }
     </style>
 </head>
 
 <body>
-
     <a href="index.html" class="back-button">← Back to Web</a>
 
     <div class="music-player">
@@ -36,6 +122,9 @@
         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
             aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
         </p>
+        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+            dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor
+            sit amet.</p>
     </div>
 
     <script>
@@ -47,9 +136,11 @@
                 if (isPlaying) {
                     // Pause logic would go here
                     playPauseBtn.textContent = '▶';
+                    document.getElementById('track-info').textContent = 'Paused - Highschool Memories';
                 } else {
                     // Play logic would go here
                     playPauseBtn.textContent = '⏸';
+                    document.getElementById('track-info').textContent = 'Playing - Highschool Memories';
                 }
                 isPlaying = !isPlaying;
             });

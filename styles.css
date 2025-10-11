@@ -1,4 +1,3 @@
-/* styles.css */
 * {
     margin: 0;
     padding: 0;
@@ -6,40 +5,11 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Arial', sans-serif;
     background-color: #000;
     color: #fff;
     overflow: hidden;
     height: 100vh;
-}
-
-/* Rainbow Grid Background */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 200%;
-    height: 200%;
-    background:
-        linear-gradient(45deg, rgba(255, 0, 0, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 0, 0, 0.1) 50%, rgba(255, 0, 0, 0.1) 75%, transparent 75%, transparent),
-        linear-gradient(-45deg, rgba(0, 255, 0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0, 255, 0, 0.1) 50%, rgba(0, 255, 0, 0.1) 75%, transparent 75%, transparent),
-        linear-gradient(45deg, rgba(0, 0, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(0, 0, 255, 0.1) 50%, rgba(0, 0, 255, 0.1) 75%, transparent 75%, transparent),
-        linear-gradient(-45deg, rgba(255, 255, 0, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 0, 0.1) 50%, rgba(255, 255, 0, 0.1) 75%, transparent 75%, transparent);
-    background-size: 100px 100px;
-    background-position: 0 0, 50px 0, 50px -50px, 0px 50px;
-    z-index: -1;
-    animation: gridMove 20s linear infinite;
-}
-
-@keyframes gridMove {
-    0% {
-        transform: translate(0, 0);
-    }
-
-    100% {
-        transform: translate(-50px, -50px);
-    }
 }
 
 header {
@@ -47,33 +17,18 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    text-align: center;
-    padding: 20px 0;
     background: rgba(0, 0, 0, 0.8);
+    padding: 15px 0;
+    text-align: center;
     z-index: 1000;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.title-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-}
-
-.main-title {
-    font-size: 2.2rem;
-    font-weight: 300;
+header h1 {
+    font-size: 1.5rem;
     color: #fff;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
-
-.subtitle {
-    font-size: 1.1rem;
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.8);
-    letter-spacing: 2px;
+    font-weight: normal;
+    letter-spacing: 1px;
 }
 
 #web-container {
@@ -81,13 +36,16 @@ header {
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    padding-top: 120px;
+    background-color: #000;
+    padding-top: 60px;
+    /* Space for header */
 }
 
 .web {
     position: absolute;
-    width: 700px;
-    height: 700px;
+    width: 500px;
+    /* Larger web size */
+    height: 500px;
 }
 
 /* Position webs evenly spaced */
@@ -117,60 +75,54 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 30;
-    text-decoration: none;
-    color: inherit;
+    z-index: 10;
 }
 
 .center-node:hover,
 .outer-node:hover {
-    transform: scale(1.1);
-}
-
-.node-image-container {
-    position: relative;
-    z-index: 35;
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8));
 }
 
 .center-node img,
 .outer-node img {
+    width: 120px;
+    /* Larger images */
+    height: 120px;
     border-radius: 50%;
-    border: 4px solid white;
+    border: 3px solid white;
     object-fit: cover;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-}
-
-.center-node img {
-    width: 150px;
-    height: 150px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
 }
 
 .outer-node img {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    /* Slightly smaller for outer nodes */
+    height: 100px;
 }
 
 .center-node {
-    width: 160px;
-}
-
-.outer-node {
     width: 140px;
 }
 
-.node-label {
-    margin-top: 12px;
-    font-size: 1.1rem;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 8px 16px;
-    border-radius: 20px;
-    white-space: nowrap;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    font-weight: 600;
+.outer-node {
+    width: 120px;
 }
 
-/* Web 1: Highschool positions - Adjusted to prevent overlap */
+.node-label {
+    margin-top: 8px;
+    font-size: 1rem;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 6px 12px;
+    border-radius: 15px;
+    white-space: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    font-weight: bold;
+}
+
+/* Web 1: Highschool positions */
 #web1 #highschool {
     top: 50%;
     left: 50%;
@@ -178,30 +130,30 @@ header {
 }
 
 #web1 #friends {
-    top: 10%;
+    top: 15%;
     left: 50%;
     transform: translateX(-50%);
 }
 
 #web1 #hello_world {
     top: 50%;
-    left: 90%;
+    left: 85%;
     transform: translateY(-50%);
 }
 
 #web1 #dna {
-    top: 90%;
+    top: 85%;
     left: 50%;
     transform: translateX(-50%);
 }
 
 #web1 #chrysanthemum {
     top: 50%;
-    left: 10%;
+    left: 15%;
     transform: translateY(-50%);
 }
 
-/* Web 2: Home positions - Adjusted to prevent overlap */
+/* Web 2: Home positions */
 #web2 #home {
     top: 50%;
     left: 50%;
@@ -209,24 +161,24 @@ header {
 }
 
 #web2 #cake {
-    top: 10%;
-    left: 20%;
+    top: 15%;
+    left: 25%;
     transform: translate(-50%, -50%);
 }
 
 #web2 #library {
-    top: 10%;
-    left: 80%;
+    top: 15%;
+    left: 75%;
     transform: translate(-50%, -50%);
 }
 
 #web2 #origin {
-    top: 90%;
+    top: 85%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-/* Web 3: My World positions */
+/* Web 3: My World position */
 #web3 #my_world {
     top: 50%;
     left: 50%;
@@ -241,7 +193,7 @@ header {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 10;
+    z-index: 1;
 }
 
 .spiral-web {
@@ -249,7 +201,7 @@ header {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.4);
     border-radius: 50%;
 }
 
@@ -272,101 +224,8 @@ header {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 3px;
+    width: 2px;
     height: 45%;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.4);
     transform-origin: 0 0;
-}
-
-/* SVG Connections */
-#web-connections {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 5;
-    pointer-events: none;
-}
-
-.connection-line {
-    stroke: rgba(255, 255, 255, 0.6);
-    stroke-width: 3;
-}
-
-/* Music player styling */
-.music-player {
-    position: fixed;
-    top: 120px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    z-index: 1000;
-}
-
-.player-controls {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-#play-pause-btn {
-    background: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#play-pause-btn:hover {
-    background: #ddd;
-}
-
-#track-info {
-    font-size: 0.9rem;
-    color: #fff;
-}
-
-/* Content styling for subpages */
-.content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 100px 20px 40px;
-    text-align: center;
-}
-
-.content h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #fff;
-}
-
-.content p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #ccc;
-    margin-bottom: 15px;
-}
-
-.back-button {
-    position: fixed;
-    top: 70px;
-    left: 20px;
-    padding: 10px 20px;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    z-index: 1000;
-}
-
-.back-button:hover {
-    background: rgba(255, 255, 255, 0.3);
 }

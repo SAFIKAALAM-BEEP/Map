@@ -1,4 +1,3 @@
-// script.js
 document.addEventListener('DOMContentLoaded', function () {
     // Define page data
     const pageData = {
@@ -72,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function () {
     nodes.forEach(node => {
         node.addEventListener('click', function () {
             const pageId = this.id;
-            // Navigate to the page
             window.location.href = `${pageId}.html`;
         });
     });
@@ -112,22 +110,21 @@ document.addEventListener('DOMContentLoaded', function () {
         const svg = document.getElementById('web-connections');
         if (!svg) return;
 
-        // Clear existing connections
-        svg.innerHTML = '';
+        svg.innerHTML = ''; // Clear existing connections
 
-        // Web 1 connections (Highschool web)
-        drawSVGConnection('highschool', 'friends');
-        drawSVGConnection('highschool', 'hello_world');
-        drawSVGConnection('highschool', 'dna');
-        drawSVGConnection('highschool', 'chrysanthemum');
+        // Web 1 connections
+        drawSVGLine('highschool', 'friends');
+        drawSVGLine('highschool', 'hello_world');
+        drawSVGLine('highschool', 'dna');
+        drawSVGLine('highschool', 'chrysanthemum');
 
-        // Web 2 connections (Home web)
-        drawSVGConnection('home', 'cake');
-        drawSVGConnection('home', 'library');
-        drawSVGConnection('home', 'origin');
+        // Web 2 connections
+        drawSVGLine('home', 'cake');
+        drawSVGLine('home', 'library');
+        drawSVGLine('home', 'origin');
     }
 
-    function drawSVGConnection(node1Id, node2Id) {
+    function drawSVGLine(node1Id, node2Id) {
         const node1 = document.getElementById(node1Id);
         const node2 = document.getElementById(node2Id);
         const svg = document.getElementById('web-connections');
@@ -136,23 +133,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const rect1 = node1.getBoundingClientRect();
         const rect2 = node2.getBoundingClientRect();
-        const containerRect = document.getElementById('web-container').getBoundingClientRect();
+        const svgRect = svg.getBoundingClientRect();
 
-        // Calculate center points of nodes
-        const x1 = rect1.left + rect1.width / 2 - containerRect.left;
-        const y1 = rect1.top + rect1.height / 2 - containerRect.top;
-        const x2 = rect2.left + rect2.width / 2 - containerRect.left;
-        const y2 = rect2.top + rect2.height / 2 - containerRect.top;
+        const x1 = rect1.left + rect1.width / 2 - svgRect.left;
+        const y1 = rect1.top + rect1.height / 2 - svgRect.top;
+        const x2 = rect2.left + rect2.width / 2 - svgRect.left;
+        const y2 = rect2.top + rect2.height / 2 - svgRect.top;
 
-        // Create SVG line
         const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line.setAttribute('x1', x1);
         line.setAttribute('y1', y1);
         line.setAttribute('x2', x2);
         line.setAttribute('y2', y2);
-        line.setAttribute('stroke', 'rgba(255, 255, 255, 0.6)');
+        line.setAttribute('stroke', 'rgba(255, 255, 255, 0.7)');
         line.setAttribute('stroke-width', '3');
-        line.setAttribute('class', 'connection-line');
+        line.setAttribute('stroke-linecap', 'round');
 
         svg.appendChild(line);
     }
