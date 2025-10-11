@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Draw connection lines after a brief delay to ensure DOM is ready
         setTimeout(() => {
             drawSVGConnections();
-        }, 100);
+        }, 200);
     }
 
     function createWebBackground(webId) {
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!webBg) return;
 
         // Create spiral circles
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 3; i++) {
             const spiral = document.createElement('div');
             spiral.className = 'spiral-web';
             webBg.appendChild(spiral);
@@ -142,9 +142,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Calculate center points of nodes
         const x1 = rect1.left + rect1.width / 2 - containerRect.left;
-        const y1 = rect1.top + rect1.height / 2 - containerRect.top + 50;
+        const y1 = rect1.top + rect1.height / 2 - containerRect.top;
         const x2 = rect2.left + rect2.width / 2 - containerRect.left;
-        const y2 = rect2.top + rect2.height / 2 - containerRect.top + 50;
+        const y2 = rect2.top + rect2.height / 2 - containerRect.top;
 
         // Create SVG line
         const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
@@ -152,8 +152,8 @@ document.addEventListener('DOMContentLoaded', function () {
         line.setAttribute('y1', y1);
         line.setAttribute('x2', x2);
         line.setAttribute('y2', y2);
-        line.setAttribute('stroke', 'rgba(255, 255, 255, 0.7)');
-        line.setAttribute('stroke-width', '2');
+        line.setAttribute('stroke', 'rgba(255, 255, 255, 0.6)');
+        line.setAttribute('stroke-width', '3');
         line.setAttribute('class', 'connection-line');
 
         svg.appendChild(line);
