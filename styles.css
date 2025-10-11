@@ -112,8 +112,6 @@ header {
     align-items: center;
     z-index: 30;
     /* High z-index to be above everything */
-    text-decoration: none;
-    color: inherit;
 }
 
 .center-node:hover,
@@ -358,97 +356,4 @@ header {
     to {
         stroke-dashoffset: -1000;
     }
-}
-
-/* Music player styling */
-.music-player {
-    position: fixed;
-    top: 120px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 15px;
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    z-index: 1000;
-    backdrop-filter: blur(10px);
-}
-
-.player-controls {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-#play-pause-btn {
-    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    transition: all 0.3s ease;
-}
-
-#play-pause-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-}
-
-#track-info {
-    font-size: 1rem;
-    color: #fff;
-    font-weight: 500;
-}
-
-/* Content styling for subpages */
-.content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 140px 20px 40px;
-    text-align: center;
-}
-
-.content h1 {
-    font-size: 3rem;
-    margin-bottom: 30px;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.content p {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    color: #e0e0e0;
-    margin-bottom: 20px;
-}
-
-.back-button {
-    position: fixed;
-    top: 120px;
-    left: 20px;
-    padding: 12px 24px;
-    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-    color: white;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    text-decoration: none;
-    z-index: 1000;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-}
-
-.back-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
 }
