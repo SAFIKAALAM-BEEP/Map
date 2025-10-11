@@ -17,12 +17,8 @@
     </header>
 
     <div id="web-container">
-        <!-- SVG for connections - MUST BE FIRST to be behind everything -->
-        <svg id="web-connections" width="100%" height="100%"></svg>
-
         <!-- Web 1: Highschool as center -->
         <div class="web" id="web1">
-            <div class="web-background" id="web1-bg"></div>
             <div class="center-node" id="highschool">
                 <div class="node-image-container">
                     <img src="highschool.png" alt="Highschool"
@@ -62,7 +58,6 @@
 
         <!-- Web 2: Home as center -->
         <div class="web" id="web2">
-            <div class="web-background" id="web2-bg"></div>
             <div class="center-node" id="home">
                 <div class="node-image-container">
                     <img src="home.png" alt="Home"
@@ -95,7 +90,6 @@
 
         <!-- Web 3: My World as center -->
         <div class="web" id="web3">
-            <div class="web-background" id="web3-bg"></div>
             <div class="center-node" id="my_world">
                 <div class="node-image-container">
                     <img src="myworld.png" alt="My World"
@@ -104,6 +98,9 @@
                 <span class="node-label">My World</span>
             </div>
         </div>
+
+        <!-- Connection lines -->
+        <svg id="connections" width="100%" height="100%"></svg>
     </div>
 
     <script src="script.js"></script>
