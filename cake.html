@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: #34495e;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="music-player">
+        <div class="player-controls">
+            <button id="play-pause-btn">▶</button>
+            <div id="track-info">Friends - Track</div>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Cake</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const playPauseBtn = document.getElementById('play-pause-btn');
+            const audio = new Audio();
+            let isPlaying = false;
+
+            audio.src = 'https://www.youtube.com/embed/fJ9rUzIMcZQ'; // Replace with actual audio stream URL
+
+            playPauseBtn.addEventListener('click', function () {
+                if (isPlaying) {
+                    audio.pause();
+                    playPauseBtn.textContent = '▶';
+                } else {
+                    audio.play();
+                    playPauseBtn.textContent = '⏸';
+                }
+                isPlaying = !isPlaying;
+            });
+        });
+    </script>
+</body>
+
+</html>
