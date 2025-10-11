@@ -5,7 +5,262 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spider Web Navigation</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        #web-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .web {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Position the webs */
+        #web1 {
+            top: 20%;
+            left: 20%;
+        }
+
+        #web2 {
+            top: 60%;
+            left: 60%;
+        }
+
+        #web3 {
+            top: 40%;
+            left: 80%;
+        }
+
+        .center-node,
+        .outer-node {
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .center-node:hover,
+        .outer-node:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
+        }
+
+        .center-node img,
+        .outer-node img {
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        .center-node {
+            width: 100px;
+        }
+
+        .outer-node {
+            width: 80px;
+        }
+
+        .node-label {
+            margin-top: 5px;
+            font-size: 0.8rem;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        /* Position nodes for web1 (highschool) */
+        #highschool {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #friends {
+            top: 20%;
+            left: 30%;
+        }
+
+        #hello_world {
+            top: 20%;
+            left: 70%;
+        }
+
+        #dna {
+            top: 70%;
+            left: 30%;
+        }
+
+        #chrysanthemum {
+            top: 70%;
+            left: 70%;
+        }
+
+        /* Position nodes for web2 (home) */
+        #home {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #cake {
+            top: 20%;
+            left: 20%;
+        }
+
+        #library {
+            top: 20%;
+            left: 80%;
+        }
+
+        #origin {
+            top: 80%;
+            left: 50%;
+        }
+
+        /* Position nodes for web3 (my_world) */
+        #my_world {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Draw web lines */
+        .web::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 300px;
+            height: 300px;
+            z-index: 1;
+        }
+
+        .web::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 2px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.3);
+            z-index: 1;
+        }
+
+        .web:nth-child(2)::after {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .web:nth-child(3)::after {
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+
+        /* Additional web lines */
+        .web-line {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.2);
+            transform-origin: 0 0;
+            z-index: 1;
+        }
+
+        /* Page content styling */
+        #page-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        #page-content.hidden {
+            display: none;
+        }
+
+        #player-container {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        #youtube-player {
+            width: 560px;
+            height: 315px;
+            background-color: #000;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #text-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20%;
+        }
+
+        #page-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        #page-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        #back-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 101;
+        }
+
+        #back-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+    </style>
 </head>
 
 <body>
@@ -75,7 +330,201 @@
         <button id="back-button">Back to Web</button>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Define page data with YouTube video IDs and background colors
+            const pageData = {
+                highschool: {
+                    videoId: 'dQw4w9WgXcQ', // Example: Rick Astley - Never Gonna Give You Up
+                    bgColor: '#FF6B6B',
+                    title: 'Highschool'
+                },
+                friends: {
+                    videoId: 'fJ9rUzIMcZQ', // Example: Queen - Bohemian Rhapsody
+                    bgColor: '#4ECDC4',
+                    title: 'Friends'
+                },
+                hello_world: {
+                    videoId: '9bZkp7q19f0', // Example: PSY - GANGNAM STYLE
+                    bgColor: '#45B7D1',
+                    title: 'Hello World'
+                },
+                dna: {
+                    videoId: 'kJQP7kiw5Fk', // Example: Luis Fonsi - Despacito
+                    bgColor: '#96CEB4',
+                    title: 'DNA'
+                },
+                chrysanthemum: {
+                    videoId: 'JGwWNGJdvx8', // Example: Ed Sheeran - Shape of You
+                    bgColor: '#FECA57',
+                    title: 'Chrysanthemum'
+                },
+                home: {
+                    videoId: 'n61ULEU7CO0', // Example: Journey - Don't Stop Believin'
+                    bgColor: '#6A0572',
+                    title: 'Home'
+                },
+                cake: {
+                    videoId: 'kJQP7kiw5Fk', // Example: Luis Fonsi - Despacito
+                    bgColor: '#AB83A1',
+                    title: 'Cake'
+                },
+                library: {
+                    videoId: 'fJ9rUzIMcZQ', // Example: Queen - Bohemian Rhapsody
+                    bgColor: '#F0C987',
+                    title: 'Library'
+                },
+                origin: {
+                    videoId: 'dQw4w9WgXcQ', // Example: Rick Astley - Never Gonna Give You Up
+                    bgColor: '#5C6BC0',
+                    title: 'Origin'
+                },
+                my_world: {
+                    videoId: '9bZkp7q19f0', // Example: PSY - GANGNAM STYLE
+                    bgColor: '#2A9D8F',
+                    title: 'My World'
+                }
+            };
+
+            // Add click event listeners to all nodes
+            const nodes = document.querySelectorAll('.center-node, .outer-node');
+            nodes.forEach(node => {
+                node.addEventListener('click', function () {
+                    const pageId = this.id;
+                    showPage(pageId);
+                });
+            });
+
+            // Add event listener to back button
+            document.getElementById('back-button').addEventListener('click', function () {
+                hidePage();
+            });
+
+            // Function to show a page
+            function showPage(pageId) {
+                const data = pageData[pageId];
+                if (!data) return;
+
+                // Hide web container
+                document.getElementById('web-container').style.display = 'none';
+
+                // Show page content
+                const pageContent = document.getElementById('page-content');
+                pageContent.classList.remove('hidden');
+
+                // Set background color
+                document.body.style.backgroundColor = data.bgColor;
+
+                // Set page title
+                document.getElementById('page-title').textContent = data.title;
+
+                // Set page text (lorem ipsum)
+                document.getElementById('page-text').textContent = generateLoremIpsum();
+
+                // Load YouTube video
+                loadYouTubeVideo(data.videoId);
+            }
+
+            // Function to hide page and return to web view
+            function hidePage() {
+                // Show web container
+                document.getElementById('web-container').style.display = 'block';
+
+                // Hide page content
+                document.getElementById('page-content').classList.add('hidden');
+
+                // Reset background color
+                document.body.style.backgroundColor = '#000';
+            }
+
+            // Function to load YouTube video
+            function loadYouTubeVideo(videoId) {
+                const playerContainer = document.getElementById('youtube-player');
+                playerContainer.innerHTML = `
+                    <iframe 
+                        width="100%" 
+                        height="100%" 
+                        src="https://www.youtube.com/embed/${videoId}?autoplay=1" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                `;
+            }
+
+            // Function to generate lorem ipsum text
+            function generateLoremIpsum() {
+                return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+            }
+
+            // Draw web lines between nodes
+            drawWebLines();
+
+            function drawWebLines() {
+                // Draw lines for web1
+                drawLineBetweenNodes('highschool', 'friends');
+                drawLineBetweenNodes('highschool', 'hello_world');
+                drawLineBetweenNodes('highschool', 'dna');
+                drawLineBetweenNodes('highschool', 'chrysanthemum');
+
+                // Draw lines for web2
+                drawLineBetweenNodes('home', 'cake');
+                drawLineBetweenNodes('home', 'library');
+                drawLineBetweenNodes('home', 'origin');
+
+                // Draw additional web lines for visual effect
+                drawAdditionalWebLines();
+            }
+
+            function drawLineBetweenNodes(node1Id, node2Id) {
+                const node1 = document.getElementById(node1Id);
+                const node2 = document.getElementById(node2Id);
+
+                if (!node1 || !node2) return;
+
+                const rect1 = node1.getBoundingClientRect();
+                const rect2 = node2.getBoundingClientRect();
+
+                const x1 = rect1.left + rect1.width / 2;
+                const y1 = rect1.top + rect1.height / 2;
+                const x2 = rect2.left + rect2.width / 2;
+                const y2 = rect2.top + rect2.height / 2;
+
+                const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+
+                const line = document.createElement('div');
+                line.className = 'web-line';
+                line.style.width = length + 'px';
+                line.style.height = '1px';
+                line.style.left = x1 + 'px';
+                line.style.top = y1 + 'px';
+                line.style.transform = `rotate(${angle}deg)`;
+
+                document.getElementById('web-container').appendChild(line);
+            }
+
+            function drawAdditionalWebLines() {
+                // Draw additional web lines that don't connect to nodes
+                for (let i = 0; i < 12; i++) {
+                    const angle = (i * 30) * Math.PI / 180;
+                    const length = 200 + Math.random() * 100;
+                    const x = window.innerWidth / 2;
+                    const y = window.innerHeight / 2;
+
+                    const line = document.createElement('div');
+                    line.className = 'web-line';
+                    line.style.width = length + 'px';
+                    line.style.height = '1px';
+                    line.style.left = x + 'px';
+                    line.style.top = y + 'px';
+                    line.style.transform = `rotate(${i * 30}deg)`;
+
+                    document.getElementById('web-container').appendChild(line);
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
