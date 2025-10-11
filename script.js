@@ -1,127 +1,103 @@
-// script.js
 document.addEventListener('DOMContentLoaded', function () {
     // Define page data with YouTube video IDs and background colors
     const pageData = {
         highschool: {
-            videoId: 'dQw4w9WgXcQ', // Example: Rick Astley - Never Gonna Give You Up
-            bgColor: '#FF6B6B',
-            title: 'Highschool'
+            videoId: 'dQw4w9WgXcQ',
+            bgColor: '#2c3e50',
+            title: 'Highschool',
+            color: '#3498db'
         },
         friends: {
-            videoId: 'fJ9rUzIMcZQ', // Example: Queen - Bohemian Rhapsody
-            bgColor: '#4ECDC4',
-            title: 'Friends'
+            videoId: 'fJ9rUzIMcZQ',
+            bgColor: '#34495e',
+            title: 'Friends',
+            color: '#e74c3c'
         },
         hello_world: {
-            videoId: '9bZkp7q19f0', // Example: PSY - GANGNAM STYLE
-            bgColor: '#45B7D1',
-            title: 'Hello World'
+            videoId: '9bZkp7q19f0',
+            bgColor: '#2c3e50',
+            title: 'Hello World',
+            color: '#2ecc71'
         },
         dna: {
-            videoId: 'kJQP7kiw5Fk', // Example: Luis Fonsi - Despacito
-            bgColor: '#96CEB4',
-            title: 'DNA'
+            videoId: 'kJQP7kiw5Fk',
+            bgColor: '#34495e',
+            title: 'DNA',
+            color: '#9b59b6'
         },
         chrysanthemum: {
-            videoId: 'JGwWNGJdvx8', // Example: Ed Sheeran - Shape of You
-            bgColor: '#FECA57',
-            title: 'Chrysanthemum'
+            videoId: 'JGwWNGJdvx8',
+            bgColor: '#2c3e50',
+            title: 'Chrysanthemum',
+            color: '#f1c40f'
         },
         home: {
-            videoId: 'n61ULEU7CO0', // Example: Journey - Don't Stop Believin'
-            bgColor: '#6A0572',
-            title: 'Home'
+            videoId: 'n61ULEU7CO0',
+            bgColor: '#16a085',
+            title: 'Home',
+            color: '#1abc9c'
         },
         cake: {
-            videoId: 'kJQP7kiw5Fk', // Example: Luis Fonsi - Despacito
-            bgColor: '#AB83A1',
-            title: 'Cake'
+            videoId: 'kJQP7kiw5Fk',
+            bgColor: '#c0392b',
+            title: 'Cake',
+            color: '#e74c3c'
         },
         library: {
-            videoId: 'fJ9rUzIMcZQ', // Example: Queen - Bohemian Rhapsody
-            bgColor: '#F0C987',
-            title: 'Library'
+            videoId: 'fJ9rUzIMcZQ',
+            bgColor: '#8e44ad',
+            title: 'Library',
+            color: '#9b59b6'
         },
         origin: {
-            videoId: 'dQw4w9WgXcQ', // Example: Rick Astley - Never Gonna Give You Up
-            bgColor: '#5C6BC0',
-            title: 'Origin'
+            videoId: 'dQw4w9WgXcQ',
+            bgColor: '#27ae60',
+            title: 'Origin',
+            color: '#2ecc71'
         },
         my_world: {
-            videoId: '9bZkp7q19f0', // Example: PSY - GANGNAM STYLE
-            bgColor: '#2A9D8F',
-            title: 'My World'
+            videoId: '9bZkp7q19f0',
+            bgColor: '#2980b9',
+            title: 'My World',
+            color: '#3498db'
         }
     };
+
+    // Create web backgrounds
+    createWebBackgrounds();
 
     // Add click event listeners to all nodes
     const nodes = document.querySelectorAll('.center-node, .outer-node');
     nodes.forEach(node => {
         node.addEventListener('click', function () {
             const pageId = this.id;
-            showPage(pageId);
+            window.location.href = `${pageId}.html`;
         });
     });
 
-    // Add event listener to back button
-    document.getElementById('back-button').addEventListener('click', function () {
-        hidePage();
-    });
+    function createWebBackgrounds() {
+        const webs = document.querySelectorAll('.web');
 
-    // Function to show a page
-    function showPage(pageId) {
-        const data = pageData[pageId];
-        if (!data) return;
+        webs.forEach(web => {
+            const webBg = document.createElement('div');
+            webBg.className = 'web-background';
 
-        // Hide web container
-        document.getElementById('web-container').style.display = 'none';
+            // Create spiral circles
+            for (let i = 0; i < 3; i++) {
+                const spiral = document.createElement('div');
+                spiral.className = 'spiral-web';
+                webBg.appendChild(spiral);
+            }
 
-        // Show page content
-        const pageContent = document.getElementById('page-content');
-        pageContent.classList.remove('hidden');
+            // Create radial lines
+            for (let i = 0; i < 8; i++) {
+                const radialLine = document.createElement('div');
+                radialLine.className = 'radial-line';
+                radialLine.style.transform = `translate(-50%, -50%) rotate(${i * 45}deg)`;
+                webBg.appendChild(radialLine);
+            }
 
-        // Set background color
-        document.body.style.backgroundColor = data.bgColor;
-
-        // Set page title
-        document.getElementById('page-title').textContent = data.title;
-
-        // Set page text (lorem ipsum)
-        document.getElementById('page-text').textContent = generateLoremIpsum();
-
-        // Load YouTube video
-        loadYouTubeVideo(data.videoId);
-    }
-
-    // Function to hide page and return to web view
-    function hidePage() {
-        // Show web container
-        document.getElementById('web-container').style.display = 'block';
-
-        // Hide page content
-        document.getElementById('page-content').classList.add('hidden');
-
-        // Reset background color
-        document.body.style.backgroundColor = '#1a1a2e';
-    }
-
-    // Function to load YouTube video
-    function loadYouTubeVideo(videoId) {
-        const playerContainer = document.getElementById('youtube-player');
-        playerContainer.innerHTML = `
-            <iframe 
-                width="100%" 
-                height="100%" 
-                src="https://www.youtube.com/embed/${videoId}?autoplay=1" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-        `;
-    }
-
-    // Function to generate lorem ipsum text
-    function generateLoremIpsum() {
-        return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+            web.appendChild(webBg);
+        });
     }
 });
