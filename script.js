@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Draw connection lines after a brief delay to ensure DOM is ready
         setTimeout(() => {
-            drawWebConnections();
+            drawAllConnections();
         }, 100);
     }
 
@@ -106,47 +106,65 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function drawWebConnections() {
-        // Web 1 connections (Highschool web)
-        drawConnection('web1', 'highschool', 'friends');
-        drawConnection('web1', 'highschool', 'hello_world');
-        drawConnection('web1', 'highschool', 'dna');
-        drawConnection('web1', 'highschool', 'chrysanthemum');
+    function drawAllConnections() {
+        clearExistingConnections();
 
-        // Web 2 connections (Home web)
-        drawConnection('web2', 'home', 'cake');
-        drawConnection('web2', 'home', 'library');
-        drawConnection('web2', 'home', 'origin');
+        // Web 1: Highschool web connections
+        connectNodes('web1', 'highschool', [
+            'friends', 'hello_world', 'dna', 'chrysanthemum'
+        ]);
 
-        // Web 3 has no outer nodes to connect to
+        // Web 2: Home web connections  
+        connectNodes('web2', 'home', [
+            'cake', 'library', 'origin'
+        ]);
+
+        // Web 3: My World has no outer nodes
     }
 
-    function drawConnection(webId, node1Id, node2Id) {
+    function clearExistingConnections() {
+        const connections = document.querySelectorAll('.connection-line');
+        connections.forEach(conn => conn.remove());
+    }
+
+    function connectNodes(webId, centerId, outerNodeIds) {
         const web = document.getElementById(webId);
-        const node1 = document.getElementById(node1Id);
-        const node2 = document.getElementById(node2Id);
+        const centerNode = document.getElementById(centerId);
 
-        if (!node1 || !node2) return;
+        if (!centerNode) return;
 
-        const rect1 = node1.getBoundingClientRect();
-        const rect2 = node2.getBoundingClientRect();
+        outerNodeIds.forEach(outerId => {
+            const outerNode = document.getElementById(outerId);
+            if (outerNode) {
+                drawConnectionLine(web, centerNode, outerNode);
+            }
+        });
+    }
+
+    function drawConnectionLine(web, node1, node2) {
+        // Get positions relative to the web container
         const webRect = web.getBoundingClientRect();
+        const node1Rect = node1.getBoundingClientRect();
+        const node2Rect = node2.getBoundingClientRect();
 
-        // Calculate positions relative to the web container
-        const x1 = rect1.left + rect1.width / 2 - webRect.left;
-        const y1 = rect1.top + rect1.height / 2 - webRect.top;
-        const x2 = rect2.left + rect2.width / 2 - webRect.left;
-        const y2 = rect2.top + rect2.height / 2 - webRect.top;
+        // Calculate center points of nodes relative to web
+        const x1 = (node1Rect.left + node1Rect.width / 2) - webRect.left;
+        const y1 = (node1Rect.top + node1Rect.height / 2) - webRect.top;
+        const x2 = (node2Rect.left + node2Rect.width / 2) - webRect.left;
+        const y2 = (node2Rect.top + node2Rect.height / 2) - webRect.top;
 
-        const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-        const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+        // Calculate distance and angle
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const length = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
 
+        // Create connection line
         const line = document.createElement('div');
         line.className = 'connection-line';
-        line.style.width = length + 'px';
-        line.style.height = '2px';
-        line.style.left = x1 + 'px';
-        line.style.top = y1 + 'px';
+        line.style.width = `${length}px`;
+        line.style.left = `${x1}px`;
+        line.style.top = `${y1}px`;
         line.style.transform = `rotate(${angle}deg)`;
 
         web.appendChild(line);

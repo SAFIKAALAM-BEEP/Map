@@ -201,10 +201,98 @@ body {
 
 .connection-line {
     position: absolute;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.6);
+    height: 2px;
     transform-origin: 0 0;
     z-index: 2;
     pointer-events: none;
+}
+
+/* Make sure webs have proper positioning context */
+.web {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    transform: translate(-50%, -50%);
+}
+
+/* Position webs evenly spaced */
+#web1 {
+    top: 40%;
+    left: 25%;
+}
+
+#web2 {
+    top: 60%;
+    left: 50%;
+}
+
+#web3 {
+    top: 40%;
+    left: 75%;
+}
+
+/* Web 1: Highschool positions - ensure they're within the web */
+#web1 #highschool {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#web1 #friends {
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#web1 #hello_world {
+    top: 50%;
+    left: 80%;
+    transform: translateY(-50%);
+}
+
+#web1 #dna {
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#web1 #chrysanthemum {
+    top: 50%;
+    left: 20%;
+    transform: translateY(-50%);
+}
+
+/* Web 2: Home positions */
+#web2 #home {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#web2 #cake {
+    top: 20%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+}
+
+#web2 #library {
+    top: 20%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+}
+
+#web2 #origin {
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Web 3: My World position */
+#web3 #my_world {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Music player styling */
