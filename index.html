@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spider Web Navigation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="web-container">
+        <!-- First Web: highschool as center -->
+        <div class="web" id="web1">
+            <div class="center-node" id="highschool">
+                <img src="https://via.placeholder.com/80/FF6B6B/FFFFFF?text=HS" alt="Highschool">
+                <span class="node-label">Highschool</span>
+            </div>
+            <div class="outer-node" id="friends">
+                <img src="https://via.placeholder.com/60/4ECDC4/FFFFFF?text=F" alt="Friends">
+                <span class="node-label">Friends</span>
+            </div>
+            <div class="outer-node" id="hello_world">
+                <img src="https://via.placeholder.com/60/45B7D1/FFFFFF?text=HW" alt="Hello World">
+                <span class="node-label">Hello World</span>
+            </div>
+            <div class="outer-node" id="dna">
+                <img src="https://via.placeholder.com/60/96CEB4/FFFFFF?text=DNA" alt="DNA">
+                <span class="node-label">DNA</span>
+            </div>
+            <div class="outer-node" id="chrysanthemum">
+                <img src="https://via.placeholder.com/60/FECA57/FFFFFF?text=C" alt="Chrysanthemum">
+                <span class="node-label">Chrysanthemum</span>
+            </div>
+        </div>
+
+        <!-- Second Web: home as center -->
+        <div class="web" id="web2">
+            <div class="center-node" id="home">
+                <img src="https://via.placeholder.com/80/6A0572/FFFFFF?text=H" alt="Home">
+                <span class="node-label">Home</span>
+            </div>
+            <div class="outer-node" id="cake">
+                <img src="https://via.placeholder.com/60/AB83A1/FFFFFF?text=C" alt="Cake">
+                <span class="node-label">Cake</span>
+            </div>
+            <div class="outer-node" id="library">
+                <img src="https://via.placeholder.com/60/F0C987/FFFFFF?text=L" alt="Library">
+                <span class="node-label">Library</span>
+            </div>
+            <div class="outer-node" id="origin">
+                <img src="https://via.placeholder.com/60/5C6BC0/FFFFFF?text=O" alt="Origin">
+                <span class="node-label">Origin</span>
+            </div>
+        </div>
+
+        <!-- Third Web: my_world as center -->
+        <div class="web" id="web3">
+            <div class="center-node" id="my_world">
+                <img src="https://via.placeholder.com/80/2A9D8F/FFFFFF?text=MW" alt="My World">
+                <span class="node-label">My World</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Content (hidden by default) -->
+    <div id="page-content" class="hidden">
+        <div id="player-container">
+            <div id="youtube-player"></div>
+        </div>
+        <div id="text-content">
+            <h1 id="page-title"></h1>
+            <p id="page-text"></p>
+        </div>
+        <button id="back-button">Back to Web</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
