@@ -169,4 +169,61 @@ document.addEventListener('DOMContentLoaded', function () {
 
         web.appendChild(line);
     }
+
+    // Alternative SVG connection approach
+    function drawSVGConnections() {
+        const svg = document.getElementById('web-connections');
+        if (!svg) return;
+
+        svg.innerHTML = ''; // Clear existing connections
+
+        // Web 1 connections
+        drawSVGLine('highschool', 'friends');
+        drawSVGLine('highschool', 'hello_world');
+        drawSVGLine('highschool', 'dna');
+        drawSVGLine('highschool', 'chrysanthemum');
+
+        // Web 2 connections
+        drawSVGLine('home', 'cake');
+        drawSVGLine('home', 'library');
+        drawSVGLine('home', 'origin');
+    }
+
+    function drawSVGLine(node1Id, node2Id) {
+        const node1 = document.getElementById(node1Id);
+        const node2 = document.getElementById(node2Id);
+        const svg = document.getElementById('web-connections');
+
+        if (!node1 || !node2 || !svg) return;
+
+        const rect1 = node1.getBoundingClientRect();
+        const rect2 = node2.getBoundingClientRect();
+        const svgRect = svg.getBoundingClientRect();
+
+        const x1 = rect1.left + rect1.width / 2 - svgRect.left;
+        const y1 = rect1.top + rect1.height / 2 - svgRect.top;
+        const x2 = rect2.left + rect2.width / 2 - svgRect.left;
+        const y2 = rect2.top + rect2.height / 2 - svgRect.top;
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', x1);
+        line.setAttribute('y1', y1);
+        line.setAttribute('x2', x2);
+        line.setAttribute('y2', y2);
+        line.setAttribute('stroke', 'rgba(255, 255, 255, 0.6)');
+        line.setAttribute('stroke-width', '2');
+
+        svg.appendChild(line);
+    }
+
+    // Call this instead of drawAllConnections in createWebStructures
+    function createWebStructures() {
+        createWebBackground('web1-bg');
+        createWebBackground('web2-bg');
+        createWebBackground('web3-bg');
+
+        setTimeout(() => {
+            drawSVGConnections();
+        }, 100);
+    }
 });
