@@ -1,3 +1,4 @@
+// script.js
 document.addEventListener('DOMContentLoaded', function () {
     // Define page data
     const pageData = {
@@ -71,7 +72,10 @@ document.addEventListener('DOMContentLoaded', function () {
     nodes.forEach(node => {
         node.addEventListener('click', function () {
             const pageId = this.id;
-            window.location.href = `${pageId}.html`;
+            // For demo purposes, we'll just show an alert
+            // In production, this would navigate to the actual page
+            alert(`Navigating to ${pageData[pageId].title} page`);
+            // window.location.href = `${pageId}.html`;
         });
     });
 
@@ -82,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Draw connection lines after a brief delay to ensure DOM is ready
         setTimeout(() => {
-            drawAllConnections();
+            drawSVGConnections();
         }, 100);
     }
 
@@ -106,90 +110,26 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function drawAllConnections() {
-        clearExistingConnections();
-
-        // Web 1: Highschool web connections
-        connectNodes('web1', 'highschool', [
-            'friends', 'hello_world', 'dna', 'chrysanthemum'
-        ]);
-
-        // Web 2: Home web connections  
-        connectNodes('web2', 'home', [
-            'cake', 'library', 'origin'
-        ]);
-
-        // Web 3: My World has no outer nodes
-    }
-
-    function clearExistingConnections() {
-        const connections = document.querySelectorAll('.connection-line');
-        connections.forEach(conn => conn.remove());
-    }
-
-    function connectNodes(webId, centerId, outerNodeIds) {
-        const web = document.getElementById(webId);
-        const centerNode = document.getElementById(centerId);
-
-        if (!centerNode) return;
-
-        outerNodeIds.forEach(outerId => {
-            const outerNode = document.getElementById(outerId);
-            if (outerNode) {
-                drawConnectionLine(web, centerNode, outerNode);
-            }
-        });
-    }
-
-    function drawConnectionLine(web, node1, node2) {
-        // Get positions relative to the web container
-        const webRect = web.getBoundingClientRect();
-        const node1Rect = node1.getBoundingClientRect();
-        const node2Rect = node2.getBoundingClientRect();
-
-        // Calculate center points of nodes relative to web
-        const x1 = (node1Rect.left + node1Rect.width / 2) - webRect.left;
-        const y1 = (node1Rect.top + node1Rect.height / 2) - webRect.top;
-        const x2 = (node2Rect.left + node2Rect.width / 2) - webRect.left;
-        const y2 = (node2Rect.top + node2Rect.height / 2) - webRect.top;
-
-        // Calculate distance and angle
-        const dx = x2 - x1;
-        const dy = y2 - y1;
-        const length = Math.sqrt(dx * dx + dy * dy);
-        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-
-        // Create connection line
-        const line = document.createElement('div');
-        line.className = 'connection-line';
-        line.style.width = `${length}px`;
-        line.style.left = `${x1}px`;
-        line.style.top = `${y1}px`;
-        line.style.transform = `rotate(${angle}deg)`;
-
-        web.appendChild(line);
-    }
-
-    // Alternative SVG connection approach
     function drawSVGConnections() {
         const svg = document.getElementById('web-connections');
         if (!svg) return;
 
-        svg.innerHTML = ''; // Clear existing connections
+        // Clear existing connections
+        svg.innerHTML = '';
 
-        // Web 1 connections
-        drawSVGLine('highschool', 'friends');
-        drawSVGLine('highschool', 'hello_world');
-        drawSVGLine('highschool', 'dna');
-        drawSVGLine('highschool', 'chrysanthemum');
+        // Web 1 connections (Highschool web)
+        drawSVGConnection('highschool', 'friends');
+        drawSVGConnection('highschool', 'hello_world');
+        drawSVGConnection('highschool', 'dna');
+        drawSVGConnection('highschool', 'chrysanthemum');
 
-        // Web 2 connections
-        drawSVGLine('home', 'cake');
-        drawSVGLine('home', 'library');
-        drawSVGLine('home', 'origin');
+        // Web 2 connections (Home web)
+        drawSVGConnection('home', 'cake');
+        drawSVGConnection('home', 'library');
+        drawSVGConnection('home', 'origin');
     }
 
-    function drawSVGLine(node1Id, node2Id) {
+    function drawSVGConnection(node1Id, node2Id) {
         const node1 = document.getElementById(node1Id);
         const node2 = document.getElementById(node2Id);
         const svg = document.getElementById('web-connections');
@@ -198,32 +138,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const rect1 = node1.getBoundingClientRect();
         const rect2 = node2.getBoundingClientRect();
-        const svgRect = svg.getBoundingClientRect();
+        const containerRect = document.getElementById('web-container').getBoundingClientRect();
 
-        const x1 = rect1.left + rect1.width / 2 - svgRect.left;
-        const y1 = rect1.top + rect1.height / 2 - svgRect.top;
-        const x2 = rect2.left + rect2.width / 2 - svgRect.left;
-        const y2 = rect2.top + rect2.height / 2 - svgRect.top;
+        // Calculate center points of nodes
+        const x1 = rect1.left + rect1.width / 2 - containerRect.left;
+        const y1 = rect1.top + rect1.height / 2 - containerRect.top;
+        const x2 = rect2.left + rect2.width / 2 - containerRect.left;
+        const y2 = rect2.top + rect2.height / 2 - containerRect.top;
 
+        // Create SVG line
         const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line.setAttribute('x1', x1);
         line.setAttribute('y1', y1);
         line.setAttribute('x2', x2);
         line.setAttribute('y2', y2);
-        line.setAttribute('stroke', 'rgba(255, 255, 255, 0.6)');
+        line.setAttribute('stroke', 'rgba(255, 255, 255, 0.7)');
         line.setAttribute('stroke-width', '2');
+        line.setAttribute('class', 'connection-line');
 
         svg.appendChild(line);
-    }
-
-    // Call this instead of drawAllConnections in createWebStructures
-    function createWebStructures() {
-        createWebBackground('web1-bg');
-        createWebBackground('web2-bg');
-        createWebBackground('web3-bg');
-
-        setTimeout(() => {
-            drawSVGConnections();
-        }, 100);
     }
 });
