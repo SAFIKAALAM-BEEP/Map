@@ -4,217 +4,503 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subpage Title</title>
+    <title>Controller</title>
+    <link rel="stylesheet" href="shared.css">
     <style>
-        /* Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
         body {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            color: #fff;
-            min-height: 100vh;
-            padding: 20px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
         }
 
-        .container {
-            max-width: 800px;
+        .paper-container {
+            max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 80px 20px 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        .paper-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 1rem;
         }
 
-        h1 {
-            font-size: 2.5rem;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        .section-heading {
+            font-size: 1.8rem;
+            margin: 2.5rem 0 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 0.5rem;
         }
 
-        /* Music Controls */
-        .music-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .subsection-heading {
+            font-size: 1.4rem;
+            margin: 2rem 0 1rem;
+            font-weight: bold;
         }
 
-        .play-btn {
-            background-color: #fff;
-            color: #333;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .play-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .play-btn.playing::after {
-            content: "❚❚";
-        }
-
-        .play-btn:not(.playing)::after {
-            content: "▶";
-        }
-
-        /* Content Styles */
-        .content {
-            line-height: 1.6;
-        }
-
-        p {
-            margin-bottom: 1.2rem;
-        }
-
-        /* Quote Styling */
-        blockquote {
-            border-left: 4px solid rgba(255, 255, 255, 0.7);
-            padding-left: 20px;
-            margin: 25px 0;
-            font-style: italic;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 15px 20px;
-            border-radius: 0 8px 8px 0;
-        }
-
-        /* Code Block Styling */
-        pre {
-            background-color: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 25px 0;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9rem;
-        }
-
-        code {
-            background-color: rgba(0, 0, 0, 0.2);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        pre code {
-            background: none;
-            padding: 0;
-        }
-
-        /* Back Button */
-        .back-btn {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: rgba(255, 255, 255, 0.2);
+        .trial-heading {
+            font-size: 1.6rem;
+            margin: 2rem 0 1rem;
             color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: all 0.3s ease;
+            font-weight: bold;
         }
 
-        .back-btn:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
+        .observation-list {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .observation-list li {
+            margin-bottom: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .results {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .conclusion {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .researcher-note {
+            font-style: italic;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            border-left: 3px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .critical-alert {
+            background: rgba(255, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border: 2px solid rgba(255, 100, 100, 0.5);
+            font-weight: bold;
         }
     </style>
 </head>
 
-<body>
-    <div class="container">
-        <header>
-            <h1>Page Title</h1>
-            <div class="music-controls">
-                <button class="play-btn"></button>
-                <span>Music Controls</span>
-            </div>
-        </header>
+<body class="gradient-bg-5">
+    <div class="paper-container">
+        <h1 class="paper-title">Am I in Love With You?</h1>
 
-        <div class="content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat.</p>
+        <p><strong>Hypothesis:</strong> Love is a quantifiable condition, observable through a series of behavioral
+            trials and emotional metrics.</p>
 
-            <blockquote>
-                "This is a styled quote. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur."
-            </blockquote>
+        <h2 class="trial-heading">Trial 1</h2>
 
-            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                laudantium.</p>
+        <p>The first betrayal was a small, folded square of paper slipped across the aisle during a math exam. I, the
+            teacher's pet, a staunch opponent of academic dishonesty, did not hesitate. Our separate desks were no
+            obstacle. When our answers matched, it was a silent, reassuring victory. When they differed, it was a
+            frantic, whispered discourse. I remember studying your handwriting on the swapped papers, the way you dotted
+            your 'i's with perfect, curved circles. I decided you had the second-best handwriting of all the boys. The
+            best was your friend's, whose script was more elegant than any girl's.</p>
 
-            <p>Here's an example of inline code: <code>const example = "Hello World";</code></p>
+        <p>But it wasn't because of your handwriting.</p>
 
-            <p>And here's a code block:</p>
-            <pre><code>function greet(name) {
-    console.log(`Hello, ${name}!`);
-    return `Welcome, ${name}!`;
-}
+        <p>It might seem shallow, and honestly, it was. I started playing your favorite game, even though I'd never
+            really held a controller before in my life. I studied its rules and maps like they were chapters in a
+            textbook. To be completely honest, the monsters terrified me and the sudden, crashing sounds made me jump. I
+            preferred the quiet parts, exploring the empty buildings and forgotten cities.</p>
 
-// Call the function
-const message = greet("Visitor");
-console.log(message);</code></pre>
+        <p>But sometimes, I had to wonder: did I actually enjoy the game, or did I just enjoy the sound of your
+            excitement? Your laughter was a better reward than any in-game treasure. It gave me something to talk to you
+            about, a bridge to you, built on pixelated foundations. A bridge I always meant to cross, but never did.</p>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat.</p>
+        <p>The moment you turned to me, the moment I had the chance to speak, I'd freeze. My words would vanish. It
+            wasn't a lack of interest. It was the opposite. Your voice was a magnet that scrambled my thoughts into
+            static. I swear, just five seconds before, I had a whole sentence perfectly formed in my head.</p>
+
+        <p>But it wasn't because of your voice.</p>
+
+        <p>I remember curling on the carpet, inching closer to you under the pretense of reading my own book. You were
+            reading too, and I latched onto that. Reading. I liked reading. I could talk about that.</p>
+
+        <p>I asked what you were reading. I don't remember the title, but I remember the conversation tilting, turning
+            academic. Your reading level was just below mine, and in a flash of stupid, unthinking competitiveness, I
+            made fun of it. That wasn't what I meant at all. It's like your presence short-circuited the part of my
+            brain responsible for diplomacy. You fell silent, clearly annoyed, and a knot of panic tightened in my
+            stomach. I didn't know how to fix it.</p>
+
+        <p>But then… you smiled. A challenge. "I'll catch up soon," you said, "and then I'll beat you."</p>
+
+        <p>I had no reply. My words had abandoned me completely. "I'm busy," I mumbled, and buried my burning face back
+            in the book I was definitely no longer reading. The words on the page swam into a meaningless gray blur,
+            every one of them replaced by the memory of your smile.</p>
+
+        <p>But it wasn't because of your smile.</p>
+
+        <p>For the first time, a teacher yelled at me. I was always a good student, so the words: "You embarrassed me in
+            front of the whole class! How haven't you memorized your speech yet? Even your partner had his memorized!"
+            felt like a physical blow. Then she left, and the dark, empty classroom seemed to swallow me. You were my
+            partner, so you saw it all. My mind scrambled for an explanation: I've never talked in front of so many
+            people. I just blanked. I couldn't even remember the first word. But the explanation wouldn't come out.
+            Instead, all I could choke out was, "I'm sorry."</p>
+
+        <p>You didn't get up and leave. You just watched me cry. I had never cried in front of anyone before, and I was
+            trying so hard to choke the sobs back. "It wasn't your fault!" you said, your voice tight with an anger that
+            was for my sake. "She was so mean!" Then you walked over and asked for my speech. I handed you the crumpled
+            paper, now spotted with tears. You smoothed it out, read it, and then you smiled. "This is so cool," you
+            said. "I'll help you memorize it."</p>
+
+        <p>And you did. You helped me memorize my speech, secretly, during every lunch period. We'd get permission, and
+            it would be just the two of us in that classroom every day, our voices echoing as we practiced.</p>
+
+        <p>Did you know I actually have a pretty good memory? I remember you really liked robots and wanted to build
+            them on other planets. I remember the sound your sneakers made squeaking against the gym floor when you
+            tried to do your impression of a Mars rover. I hope your dream comes true.</p>
+
+        <p>I remember your mom is a doctor. I pretended to be disgusted by that graphic story you told me about her
+            pulling a long, parasitic worm from a patient, but the truth is, I found it fascinating. I copied the
+            grossed-out reactions of our classmates because I was afraid of seeming weird, of being different from
+            everyone else.</p>
+
+        <p>I remember when you were frustrated about an argument with your friend. I was so stubbornly on your side that
+            you actually started defending him, and then you realized how silly the whole fight was, and we both started
+            laughing.</p>
+
+        <p>And I'm sorry, but I remember lying to you. I had my speech memorized by the second day. I only pretended to
+            forget a line, to fumble a word, to question an inflection, just so we could keep meeting.</p>
+
+        <p>I liked hearing your speech, too. It was cool. It was great, and I got to hear you repeat it every day. I
+            just didn't know how to say that back then.</p>
+
+        <p>It was because of your warmth. Your voice, which could make my thoughts scramble. Your smile that made the
+            words on a page blur. Your laughter, your handwriting, our arguments, your competitiveness, your
+            "horrifying" stories. You being the first person to ever see me cry.</p>
+
+        <p>And my lies.</p>
+
+        <p>The day we got our middle school acceptance letters was a formality. I opened the letter, saw the name of a
+            school I'd never heard you mention, and shrugged. "Oh. I guess this is it," I said, the words were like
+            simple facts. That's just how it is.</p>
+
+        <p>But your face did something I didn't expect. It fell. The easy confidence you always carried tightened into
+            confusion. "There must have been a mistake," you said, your voice low. "You didn't select the same school as
+            me? Can't you change it?"</p>
+
+        <p>The question was so earnest it felt like a physical push. My own logic, my simple acceptance, suddenly felt
+            cold and stupid. A defensive, flippant thing leaped from my mouth before I could cage it. "No. Why would I?"
+        </p>
+
+        <p>It was the wrong answer. I knew it the moment it left my stupid, stupid mouth. You had no response for that.
+            Your gaze dropped, and you offered a small: "Oh... Good luck."</p>
+
+        <p>"...You too."</p>
+
+        <p>On the last day, after the graduation speeches, everyone was swapping numbers, making promises to their
+            friends that we all knew were too big to keep. I wanted to ask for yours, but I didn't know how to bridge
+            the gap. We were islands, each surrounded by our own separate seas of people.</p>
+
+        <p>And then our eyes met across the crowd.</p>
+
+        <p>You didn't call my name. I didn't call yours. The wide, easy smile you'd been giving everyone else faded into
+            something hesitant, almost neutral, as you looked at me. It lasted only a second before it softened into a
+            small, private smile, accompanied by a slow wave and a single, silent thumbs-up.</p>
+
+        <p>I smiled back and returned the gesture.</p>
+
+        <p>It wasn't until years later, replaying that moment in my head, that I finally figured out what I had been
+            feeling. I'm a lot denser than I look when it comes to things like that.</p>
+
+        <h3 class="subsection-heading">Observations:</h3>
+        <ul class="observation-list">
+            <li>Documented Fixation: Subject authored numerous unsent communications detailing P.O.I.'s intelligence,
+                "weird kindness," and compulsive competitiveness. Frequent praise of his "compassion," a term directly
+                correlated with the incident in the dark classroom.</li>
+            <li>Parasomatic Markings: Observed repeated, furtive sketching of cardiac symbols in notebook margins,
+                followed immediately by aggressive erasure leading to substrate degradation. A clear approach-avoidance
+                pattern.</li>
+            <li>Schedule Disruption: Subject forgot to complete two homework assignments—a significant deviation from a
+                previously flawless record. Noted preoccupation superseded academic imperatives.</li>
+            <li>Affective Lability: Subject's emotional state was highly variable. Documented instances of inappropriate
+                smiling while recalling P.O.I.'s humor, followed by acute anxiety over perceived social missteps, and
+                punctuated by frequent, unprompted sighing.</li>
+            <li>Post-Separation Adjustment: Subject's cognitive functions and daily routines returned to established
+                baseline following the graduation event and termination of regular contact.</li>
+        </ul>
+
+        <div class="results">
+            <strong>Results:</strong> Data suggests a proto-romantic attachment. The subject's emotional intelligence
+            was insufficient for proper classification at the time of trial. Case closed.
         </div>
 
-        <a href="index.html" class="back-btn">← Back to Notes</a>
+        <h2 class="trial-heading">Trial 2</h2>
+
+        <p>In middle school, I was still a dedicated student, so it was a shock to hear my friends start dating. School
+            was not the place to focus on anything but studying! My reaction was always, "Well, that's great, congrats,
+            but we have a science exam next period. Did you study the main types of rocks? They're igneous, sedimentary
+            and metamorphic..."</p>
+
+        <p>It wasn't that I hated 'love' or anything. I'd been introduced to the wonderful world of romance novels and
+            absorbed every word, and had started secretly writing fan fiction about fictional characters. These were
+            worlds I kept entirely to myself until one day in 7th grade.</p>
+
+        <p>I was sitting next to this girl who usually sat a seat away from me in all our classes. We were always
+            arranged by our last names, separated by this annoying guy in the middle. We ended up sitting next to each
+            other during lunch at one point. It was maybe out of boredom, or maybe I just wanted someone to have a peek
+            into my world. I wasn't lonely, per se, but I wanted someone to just…see me as more than just a walking
+            textbook, forever glaring at the whiteboard like it had personally offended me.</p>
+
+        <p>I was so narcissistic. Despite reading books that were literally made by other people, I had this thought
+            that I was the only one with these entire worlds in my head. So I asked her. "Do you imagine worlds in your
+            head too?"</p>
+
+        <p>To my surprise, she said yes.</p>
+
+        <p>I was entranced. I wanted to know everything about her worlds. There was a magic academy with the coolest
+            magic system, a combination of elements from other stories. It was awesome. And… There was a cute love
+            story, too. I felt my defenses slipping, and I let her into one of my worlds, one of my fanfictions. A
+            sci-fi world in the future with controlled interdimensional travel, where dragons from other worlds would
+            bond with my characters as they fought a war against an enemy faction trying to invade their home.</p>
+
+        <p>I had inserted a character from another story that I really liked. He had this fierce sense of justice, and
+            losing his family young made him want to grow up too fast. I wanted him to suffer less, to have a happy
+            ending. It was a stupid solution: I created a love interest for him. Someone who understood his pain but
+            could help him recover from his obsession with saving others over dealing with his own. Someone to make him
+            feel like a kid again.</p>
+
+        <p>Friends to lovers was a trope I had an unhealthy obsession with at the time.</p>
+
+        <p>She praised my worlds, even weaving in threads of inspiration from her own. We would talk about it every
+            lunch period, our heads bent close together in hushed whispers, a secret society of two built on the frantic
+            exchange of folded papers. I started growing more protective of her, a fierce, sudden instinct. The annoying
+            guy who always sat between us became the bane of my existence. He was always trying to copy her homework!
+            And like the hypocritical goody-two-shoes I was, I'd swoop in and force him to do his own work. She was just
+            too nice, too willing to help. Clearly, she needed a barrier against nuisances. And that's what I decided to
+            become.</p>
+
+        <p>I became her barrier. I started talking more in class, loudly discussing the shows and books I liked,
+            creating a distraction to shield our little world from intruders. I didn't realize it at the time, but in
+            building this wall to protect her, I was accidentally letting more pieces of the real me slip out for
+            everyone to see.</p>
+
+        <p>I was genuinely excited to go to school because it meant I could see her every day. We joined the same club
+            activities, we traded our favorite books, and we spent hours drawing the landscapes of our imagined worlds.
+            We had so much in common. It was just so much fun, you know? To finally talk about the things you love with
+            someone who just… gets it.</p>
+
+        <p>The day the high school acceptance letters came was the day the map of my future was redrawn, and my heart
+            sank when I saw our paths diverging. I was devastated. She had worked so hard for her school, and she was so
+            proud. I was proud of her, too, of course I was. But beneath the pride was a cold, sharp fear I didn't
+            understand.</p>
+
+        <p>This time, I couldn't just accept it with a shrug. I didn't understand why it felt so different, so wrong. My
+            body seemed to understand before my brain did. I started finding reasons to be near her, my feet carrying me
+            on a new, longer route home just so I could walk with her, clinging to those extra twenty minutes like a
+            lifeline.</p>
+
+        <p>And then there was the jealousy. A sharp, ugly feeling I'd never met before. She had other friends, friends
+            who seemed to know a version of her I didn't, friends who lived closer and would see her every day. I felt
+            like just another pebble in her stream, and I was terrified the current would finally pull me away and she
+            wouldn't even notice I was gone.</p>
+
+        <p>But then she said it. Two words that hit me like a train and anchored me to the riverbed all at once: "best
+            friend."</p>
+
+        <p>I don't know why, but those two words fixed something broken in me. They reassured me in a way nothing else
+            could. And I… I loved them. I used them everywhere, like a little kid who'd just learned a magical
+            incantation. Hehe. My best friend.</p>
+
+        <p>We kept in contact through high school, getting into all sorts of fun shenanigans over texts and calls, and
+            we still talk to this day. She is my anchor. She is the best friend without whom this map of my life would
+            have led to a much quieter, more closed-off person. I wouldn't have learned to share my worlds without her
+            first teaching me how.</p>
+
+        <h3 class="subsection-heading">Observations:</h3>
+        <ul class="observation-list">
+            <li>Intellectual & Creative Merging: Subject's private world-building activities shifted from a solitary to
+                a collaborative pursuit, with the P.O.I. acting as a co-creator and primary audience. Subject exhibited
+                high investment in developing shared narrative universes.</li>
+            <li>Protective Ritualization: Subject self-appointed as a "barrier" against perceived social nuisances,
+                demonstrating high territoriality and a proprietary sense of guardianship over the P.O.I.'s time and
+                attention.</li>
+            <li>Resource Reallocation: Subject deliberately altered their daily transit route, sacrificing significant
+                personal time to maximize proximity, indicating a high prioritization of the bond.</li>
+            <li>Novel Emotional Data: The emergence of jealousy was recorded. A new, volatile variable suggesting a
+                perceived threat to the relationship's exclusivity.</li>
+            <li>Stabilizing Input: The lexical signifier "best friend" functioned as a powerful cognitive anchor,
+                immediately resolving anxiety and codifying the relationship's permanence, as evidenced by the subject's
+                repetitive and affirmative use of the term.</li>
+        </ul>
+
+        <div class="results">
+            <strong>Results:</strong> Data indicates a deep, creative, and intensely devoted platonic attachment. The
+            subject's self-reported identity and social development are directly correlated with the formation of this
+            bond. The relationship served as a primary catalyst for the subject's increased social openness and
+            emotional expression. Classification: Platonic Soulmate. The bond is foundational to the subject's social
+            development and creative identity. No intervention required.
+        </div>
+
+        <div class="researcher-note">
+            <strong>Researcher's Note:</strong> The document previously flagged as a "kidnapping plan" has been
+            re-evaluated. It is a fictional narrative, drafted by the subject as a hypothetical contingency for
+            "rescuing" the P.O.I. from a variety of exaggerated, non-specific social scenarios. The tone is melodramatic
+            and aligns with the subject's established pattern of expressing care through grandiose, fictionalized
+            narratives. It does not constitute a literal threat, merely a peculiar and somewhat concerning manifestation
+            of their protective devotion.
+        </div>
+
+        <h2 class="trial-heading">Trial 3</h2>
+
+        <div class="critical-alert">
+            [This trial should have been rejected. Who approved this? It's a clear violation of the Belmont principles:
+            respect for persons, beneficence, and justice. Why? Because the subject was also the lead researcher, and
+            the experiment was designed to fail.]
+        </div>
+
+        <p>This was less a feeling and more a sentence. Every action was wrapped in a sweet, giddy happiness the moment
+            you texted, all tangled up with the icky, gut-churning certainty that you weren't mine. It was a secret I
+            couldn't tell anyone, an eldritch monster with a tentacle around my throat, because I couldn't even
+            comprehend it myself. It was beyond my mortal understanding. I was silenced.</p>
+
+        <p>I dropped everything for you. I felt a physical, weird pain whenever you were upset. I knew immediately when
+            you were upset. You only stay up late when you're spiraling. You know you completely wrecked my sleep
+            schedule, right? I would spend entire nights composing speeches to comfort you, crafting each sentence so it
+            wouldn't sound like a hollow platitude. You put my literary analysis and vocabulary to the test more than
+            any English exam. You were the only subject worth losing sleep over, though I resented every minute of it.
+            I'm sorry.</p>
+
+        <p>I adored you with a ferocity that scared me. It was a secret guardianship that spun dark, intricate fantasies
+            of capturing every person who ever hurt you and sealing them away in the prison of my reflection, their
+            malice dismembered and displayed for my eyes only, a permanent warning to keep your world safe. My
+            admiration was so complete it became a form of worship: you were everything I aspired to be. The idea of
+            tarnishing that perfection was alien to me. All I truly wanted, with a desperate, quiet ache, was to know
+            what it felt like to be in your arms.</p>
+
+        <p>Just kidding. I don't care about you. Not even a little. You're nothing to me, and I'm going to cut you out
+            of my life with a smile on my face.</p>
+
+        <p>I lied.</p>
+
+        <p>You are a poison. An addiction. My synapses fire for you in a futile loop, my dopamine circuits craving a
+            reward that never arrives, and my prefrontal cortex has gone completely offline. You shuffled my emotions
+            and logic into a deck of useless cards. I've become so detached from my own mind that I've lost feeling in
+            my body. I failed you. I gave you terrible advice, not because I wanted to, but because I couldn't string
+            two logical thoughts together when I was talking to you. I'm sorry.</p>
+
+        <p>What a hypocrite I am. I'm the one who tells my friends to be logical, to guard their hearts, all while I
+            would have rewritten my own DNA for a chance to be someone you'd love. When did I become this person? When
+            did my own worth become so negotiable?</p>
+
+        <p>You weren't even my type. You were static, background noise in the grand broadcast of my life a year ago.
+            Now, I struggle to even recall the specific geometry of your face, only the seismic effect of your presence.
+            So when did this switch flip? When did you become the main event?</p>
+
+        <p>Is this what they call love? They make it sound like a sudden, beautiful collision. But this feels like a
+            chronic illness. It hurts. This can't be right.</p>
+
+        <p>Every time you dismissed yourself, every time you mentioned some other girl, a silent scream would build in
+            my throat: Don't you see what I see? You are fascinating. You are worthwhile. Stop it. Be logical. You are
+            wanted. You are needed. You are liked, right here, by me, so please just stop.</p>
+
+        <p>Then there were the nights we'd talk for hours, and you'd just vanish. You fell asleep, but in that silence,
+            I'd feel a visceral, aching absence, as if you'd shipped out to war and left me on the dock alone. I'm
+            sorry.</p>
+
+        <p>I wasn't one to share my feelings. Everyone knew me as closed-off. I was not someone who cried in hallways or
+            had public breakdowns. There wasn't enough time in my schedule for that, and I had no interest in penciling
+            "emotional collapse" into my planner. But my frustrations, my anger, my most secret interests, my thoughts,
+            they spilled out to you so easily, even the ones about you. You saw the worst of my emotions, and I took
+            advantage of your kindness to dump them on you. I'm sorry I hurt you. I was a bad friend. I'm sorry.</p>
+
+        <p>My mind was a fortress of thoughts, walls, and relentless logic, but you flooded it until everything went
+            blank like a cell shriveling up in a hypertonic solution. That's why I turned stupid around you, my logic
+            just noped out. I thought love was supposed to be a loud, dramatic riot. But with you, it was the opposite.
+            Every time I heard your voice, my world went quiet.</p>
+
+        <p>I saw a reflection of my younger self in you, a version of me that was so much more vulnerable. I was trying
+            to protect her, in a way that no one had ever protected me. It was never really about you. It was about
+            saving a ghost. That was the seed of my obsession. But you were never that child. You possessed your own
+            resilience. I'm sorry.</p>
+
+        <p>[The following trial notes appear to have been ripped out and destroyed. Here is what remains of the page.]
+        </p>
+
+        <p>I used to hide in fictional worlds and silence my own anxieties. You taught me to do the opposite: to share
+            my inner landscapes and speak my fears to my friends. You showed me how to be present in my own reality.</p>
+
+        <p>Thank you.</p>
+
+        <h3 class="subsection-heading">Observation:</h3>
+        <div class="critical-alert">
+            CRITICAL PROTOCOL BREACH: Subject is in a state of severe physiological and psychological distress. Data
+            indicates a pathological fixation on the target, characterized by obsessive thought patterns, acute
+            self-loathing, and a measurable degradation in logical reasoning. The subject's sleep-wake cycles are
+            directly tethered to the target's attention, resulting in chronic sleep deprivation. Behavioral analysis
+            confirms a dependency profile analogous to substance addiction, where the subject's emotional state is
+            entirely contingent upon the target's validation. The subject demonstrates painful metacognitive awareness
+            of their own compromised condition, yet exhibits a complete loss of agency to self-correct. The overall
+            valence of the experience is overwhelmingly negative, defined by high-intensity psychological pain and a
+            corrosive erosion of self-identity.
+        </div>
+
+        <ul class="observation-list">
+            <li>Cognitive Dissonance (Extreme): Logs show violent oscillation between idealization ("I adored you") and
+                devaluation ("You are poison").</li>
+            <li>Systemic Dysregulation: Documented physiological (sleep deprivation, unexplained crying) and behavioral
+                (decline in academic performance, social withdrawal) dysregulation.</li>
+            <li>Loss of Agency: Subject explicitly describes a compromised will, stating an inability to think logically
+                in the target's presence and a willingness to "rewrite my DNA for you."</li>
+            <li>Compromised Self-Perception: A marked and sudden collapse in self-esteem is recorded, with the subject
+                self-identifying as an "awful person" and a "hypocrite."</li>
+        </ul>
+
+        <div class="results">
+            <strong>Results:</strong> The identified strain is pathogenic. The experiment is corrosive and
+            unsustainable. The subject is being psychologically tortured. Experiment TERMINATED.
+        </div>
+
+        <h2 class="section-heading">Conclusion</h2>
+
+        <div class="conclusion">
+            <p>The data is inconclusive. The operational definition of 'love' proves inconsistent across trials,
+                rendering a singular diagnosis impossible. It is not a monolithic condition but a spectrum of reactive
+                attachments, ranging from the formative bonds of friendship to a state of obsessive dysfunction. Trial 1
+                established a foundational template: affection as a function of shared secrets and mutual vulnerability.
+                Trial 2 demonstrated that devotion can be a stable, creative, and life-altering force. Trial 3, however,
+                revealed the variable's latent toxicity, an attachment so consuming it dismantles the subject's logical
+                framework and self-worth.</p>
+
+            <p>The critical finding is that the emotion itself is not the primary indicator. The key variable is the
+                self that is reflected back through the object of attachment. Does the connection reflect a self that is
+                empowered, understood, and expanded, as in Trial 2? Or does it reflect a fractured, illogical, and
+                diminished self, as in Trial 3?</p>
+
+            <p><strong>Therefore, the core question is not "Am I in love with you?" but "What version of me does this
+                    love create?" The most viable love is that which returns a reflection of a self the subject
+                    recognizes, and, crucially, wishes to keep.</strong></p>
+        </div>
+
+        <a href="index.html" class="back-btn">Back to Notes</a>
     </div>
 
+    <script src="shared.js"></script>
     <script>
-        // Music control functionality
+        // Set a specific YouTube video for the controller page
         document.addEventListener('DOMContentLoaded', function () {
-            const playButton = document.querySelector('.play-btn');
-            let audio = null;
-            let isPlaying = false;
-
-            // YouTube audio placeholder - replace with actual YouTube video ID
-            const youtubeVideoId = 'YOUR_VIDEO_ID_HERE';
-
-            playButton.addEventListener('click', function () {
-                if (!isPlaying) {
-                    // Start playing music
-                    if (!audio) {
-                        // In a real implementation, you would use the YouTube IFrame API
-                        // This is a placeholder for the functionality
-                        audio = new Audio(); // Placeholder
-                        console.log('Music would start playing from YouTube video:', youtubeVideoId);
-                    }
-
-                    playButton.classList.add('playing');
-                    isPlaying = true;
-                    console.log('Music playing');
-                } else {
-                    // Pause music
-                    playButton.classList.remove('playing');
-                    isPlaying = false;
-                    console.log('Music paused');
+            // Wait for the audio player to initialize
+            setTimeout(() => {
+                if (window.audioPlayer) {
+                    // Set an emotional/contemplative-appropriate video
+                    window.audioPlayer.loadVideo('JRlCyZRU34I'); // Example emotional music
                 }
-            });
+            }, 1000);
         });
     </script>
 </body>
