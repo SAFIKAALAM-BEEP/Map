@@ -6,223 +6,201 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Musical Notes</title>
     <style>
-        /* Global Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
             background-color: #000;
             color: #fff;
+            font-family: 'Georgia', serif;
+            min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Musical Staff Background */
-        .staff-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.7;
-        }
-
-        .staff-line {
+        /* Musical staff background */
+        .staff {
             position: absolute;
             width: 100%;
-            height: 1px;
-            background-color: #fff;
-            left: 0;
+            height: 100%;
+            background-image:
+                linear-gradient(to bottom, transparent 95%, rgba(255, 255, 255, 0.1) 95%),
+                linear-gradient(to bottom, transparent 90%, rgba(255, 255, 255, 0.1) 90%),
+                linear-gradient(to bottom, transparent 85%, rgba(255, 255, 255, 0.1) 85%),
+                linear-gradient(to bottom, transparent 80%, rgba(255, 255, 255, 0.1) 80%),
+                linear-gradient(to bottom, transparent 75%, rgba(255, 255, 255, 0.1) 75%);
+            background-size: 100% 20%;
+            z-index: -1;
+            opacity: 0.5;
         }
 
-        .staff-line:nth-child(1) {
-            top: 20%;
-        }
-
-        .staff-line:nth-child(2) {
-            top: 30%;
-        }
-
-        .staff-line:nth-child(3) {
-            top: 40%;
-        }
-
-        .staff-line:nth-child(4) {
-            top: 50%;
-        }
-
-        .staff-line:nth-child(5) {
-            top: 60%;
-        }
-
-        /* Main Container */
         .container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 2rem;
         }
 
         h1 {
             font-size: 3rem;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             text-align: center;
-            color: #fff;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
-        /* Notes Circle */
         .notes-circle {
             position: relative;
             width: 500px;
             height: 500px;
             border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
         }
 
         .center-note {
-            position: absolute;
             width: 80px;
             height: 80px;
             background-color: #fff;
             border-radius: 50%;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            color: #000;
+            font-weight: bold;
             z-index: 10;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-        }
-
-        .center-note img {
-            width: 50px;
-            height: 50px;
         }
 
         .note {
             position: absolute;
             width: 70px;
             height: 70px;
+            background-color: #fff;
             border-radius: 50%;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             transform-origin: 250px;
             transition: all 0.3s ease;
-            cursor: pointer;
-            background-color: #222;
-            border: 2px solid #fff;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
         }
 
         .note:hover {
             transform: scale(1.2);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.9);
         }
 
         .note img {
-            width: 40px;
-            height: 40px;
-            filter: invert(1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
-        .note-label {
-            position: absolute;
-            bottom: -25px;
+        .note-placeholder {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: #fff;
             font-size: 0.8rem;
             text-align: center;
-            width: 100px;
-            left: -15px;
+            padding: 5px;
         }
 
-        /* Footer */
+        /* Position notes in a circle */
+        .note:nth-child(2) {
+            transform: rotate(0deg) translate(200px) rotate(0deg);
+        }
+
+        .note:nth-child(3) {
+            transform: rotate(45deg) translate(200px) rotate(-45deg);
+        }
+
+        .note:nth-child(4) {
+            transform: rotate(90deg) translate(200px) rotate(-90deg);
+        }
+
+        .note:nth-child(5) {
+            transform: rotate(135deg) translate(200px) rotate(-135deg);
+        }
+
+        .note:nth-child(6) {
+            transform: rotate(180deg) translate(200px) rotate(-180deg);
+        }
+
+        .note:nth-child(7) {
+            transform: rotate(225deg) translate(200px) rotate(-225deg);
+        }
+
+        .note:nth-child(8) {
+            transform: rotate(270deg) translate(200px) rotate(-270deg);
+        }
+
+        .note:nth-child(9) {
+            transform: rotate(315deg) translate(200px) rotate(-315deg);
+        }
+
         footer {
-            margin-top: 2rem;
+            margin-top: 3rem;
             text-align: center;
-            color: #aaa;
-            font-size: 0.9rem;
+            opacity: 0.7;
         }
     </style>
 </head>
 
 <body>
-    <div class="staff-container">
-        <div class="staff-line"></div>
-        <div class="staff-line"></div>
-        <div class="staff-line"></div>
-        <div class="staff-line"></div>
-        <div class="staff-line"></div>
-    </div>
+    <div class="staff"></div>
 
     <div class="container">
         <h1>Musical Notes</h1>
 
         <div class="notes-circle">
-            <div class="center-note">
-                <img src="images/home.png" alt="Home">
-            </div>
+            <div class="center-note">HOME</div>
 
-            <!-- Notes positioned around the circle -->
-            <div class="note" style="transform: rotate(0deg) translate(200px) rotate(-0deg);">
-                <a href="library.html"><img src="images/library.png" alt="Library"></a>
-                <div class="note-label">Library</div>
-            </div>
+            <a href="library.html" class="note">
+                <div class="note-placeholder">Library</div>
+            </a>
 
-            <div class="note" style="transform: rotate(60deg) translate(200px) rotate(-60deg);">
-                <a href="highschool.html"><img src="images/highschool.png" alt="High School"></a>
-                <div class="note-label">High School</div>
-            </div>
+            <a href="highschool.html" class="note">
+                <div class="note-placeholder">High School</div>
+            </a>
 
-            <div class="note" style="transform: rotate(120deg) translate(200px) rotate(-120deg);">
-                <a href="chrysanthemum.html"><img src="images/chrysanthemum.png" alt="Chrysanthemum"></a>
-                <div class="note-label">Chrysanthemum</div>
-            </div>
+            <a href="chrysanthemum.html" class="note">
+                <div class="note-placeholder">Chrysanthemum</div>
+            </a>
 
-            <div class="note" style="transform: rotate(180deg) translate(200px) rotate(-180deg);">
-                <a href="controller.html"><img src="images/controller.png" alt="Controller"></a>
-                <div class="note-label">Controller</div>
-            </div>
+            <a href="controller.html" class="note">
+                <div class="note-placeholder">Controller</div>
+            </a>
 
-            <div class="note" style="transform: rotate(240deg) translate(200px) rotate(-240deg);">
-                <a href="hello_world.html"><img src="images/helloworld.png" alt="Hello World"></a>
-                <div class="note-label">Hello World</div>
-            </div>
+            <a href="hello_world.html" class="note">
+                <div class="note-placeholder">Hello World</div>
+            </a>
 
-            <div class="note" style="transform: rotate(300deg) translate(200px) rotate(-300deg);">
-                <a href="my_world.html"><img src="images/myworld.png" alt="My World"></a>
-                <div class="note-label">My World</div>
-            </div>
+            <a href="my_world.html" class="note">
+                <div class="note-placeholder">My World</div>
+            </a>
+
+            <a href="home.html" class="note">
+                <div class="note-placeholder">Home</div>
+            </a>
         </div>
 
         <footer>
-            <p>Click on a note to explore its content</p>
+            <p>Click on a note to explore</p>
         </footer>
     </div>
-
-    <script>
-        // Add subtle animation to notes
-        document.addEventListener('DOMContentLoaded', function () {
-            const notes = document.querySelectorAll('.note');
-
-            notes.forEach(note => {
-                note.addEventListener('mouseenter', function () {
-                    this.style.transform = this.style.transform.replace('scale(1)', 'scale(1.2)');
-                });
-
-                note.addEventListener('mouseleave', function () {
-                    this.style.transform = this.style.transform.replace('scale(1.2)', 'scale(1)');
-                });
-            });
-        });
-    </script>
 </body>
 
 </html>
