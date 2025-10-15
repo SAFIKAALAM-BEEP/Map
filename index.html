@@ -4,87 +4,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HONS 3011X_Assignment2_SAlam</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Musical Notes</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Musical Staff Background */
+        .staff-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        .staff-line {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background-color: #fff;
+            left: 0;
+        }
+
+        .staff-line:nth-child(1) {
+            top: 20%;
+        }
+
+        .staff-line:nth-child(2) {
+            top: 30%;
+        }
+
+        .staff-line:nth-child(3) {
+            top: 40%;
+        }
+
+        .staff-line:nth-child(4) {
+            top: 50%;
+        }
+
+        .staff-line:nth-child(5) {
+            top: 60%;
+        }
+
+        /* Main Container */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Notes Circle */
+        .notes-circle {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .center-note {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+        }
+
+        .center-note img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .note {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-origin: 250px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background-color: #222;
+            border: 2px solid #fff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .note:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        .note img {
+            width: 40px;
+            height: 40px;
+            filter: invert(1);
+        }
+
+        .note-label {
+            position: absolute;
+            bottom: -25px;
+            color: #fff;
+            font-size: 0.8rem;
+            text-align: center;
+            width: 100px;
+            left: -15px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 
 <body>
-    <header>
-        <h1>HONS 3011X_Assignment2_SAlam</h1>
-    </header>
-
-    <div id="web-container">
-        <!-- Web 1: Highschool as center -->
-        <div class="web" id="web1">
-            <div class="web-background" id="web1-bg"></div>
-            <div class="center-node" id="highschool">
-                <img src="highschool.png" alt="Highschool"
-                    onerror="this.src='https://via.placeholder.com/120/3498db/ffffff?text=HS'">
-                <span class="node-label">Highschool</span>
-            </div>
-            <div class="outer-node" id="friends">
-                <img src="friends.png" alt="Friends"
-                    onerror="this.src='https://via.placeholder.com/100/e74c3c/ffffff?text=F'">
-                <span class="node-label">Friends</span>
-            </div>
-            <div class="outer-node" id="hello_world">
-                <img src="helloworld.png" alt="Hello World"
-                    onerror="this.src='https://via.placeholder.com/100/2ecc71/ffffff?text=HW'">
-                <span class="node-label">Hello World</span>
-            </div>
-            <div class="outer-node" id="dna">
-                <img src="dna.png" alt="DNA"
-                    onerror="this.src='https://via.placeholder.com/100/9b59b6/ffffff?text=DNA'">
-                <span class="node-label">DNA</span>
-            </div>
-            <div class="outer-node" id="chrysanthemum">
-                <img src="chrysanthemum.png" alt="Chrysanthemum"
-                    onerror="this.src='https://via.placeholder.com/100/f1c40f/ffffff?text=C'">
-                <span class="node-label">Chrysanthemum</span>
-            </div>
-        </div>
-
-        <!-- Web 2: Home as center -->
-        <div class="web" id="web2">
-            <div class="web-background" id="web2-bg"></div>
-            <div class="center-node" id="home">
-                <img src="home.png" alt="Home"
-                    onerror="this.src='https://via.placeholder.com/120/1abc9c/ffffff?text=H'">
-                <span class="node-label">Home</span>
-            </div>
-            <div class="outer-node" id="cake">
-                <img src="cake.png" alt="Cake"
-                    onerror="this.src='https://via.placeholder.com/100/e74c3c/ffffff?text=C'">
-                <span class="node-label">Cake</span>
-            </div>
-            <div class="outer-node" id="library">
-                <img src="library.png" alt="Library"
-                    onerror="this.src='https://via.placeholder.com/100/9b59b6/ffffff?text=L'">
-                <span class="node-label">Library</span>
-            </div>
-            <div class="outer-node" id="origin">
-                <img src="origin.png" alt="Origin"
-                    onerror="this.src='https://via.placeholder.com/100/2ecc71/ffffff?text=O'">
-                <span class="node-label">Origin</span>
-            </div>
-        </div>
-
-        <!-- Web 3: My World as center -->
-        <div class="web" id="web3">
-            <div class="web-background" id="web3-bg"></div>
-            <div class="center-node" id="my_world">
-                <img src="myworld.png" alt="My World"
-                    onerror="this.src='https://via.placeholder.com/120/3498db/ffffff?text=MW'">
-                <span class="node-label">My World</span>
-            </div>
-        </div>
+    <div class="staff-container">
+        <div class="staff-line"></div>
+        <div class="staff-line"></div>
+        <div class="staff-line"></div>
+        <div class="staff-line"></div>
+        <div class="staff-line"></div>
     </div>
 
-    <!-- SVG for connections -->
-    <svg id="web-connections" width="100%" height="100%"
-        style="position: absolute; top: 0; left: 0; z-index: 1; pointer-events: none;"></svg>
+    <div class="container">
+        <h1>Musical Notes</h1>
 
-    <script src="script.js"></script>
+        <div class="notes-circle">
+            <div class="center-note">
+                <img src="images/home.png" alt="Home">
+            </div>
+
+            <!-- Notes positioned around the circle -->
+            <div class="note" style="transform: rotate(0deg) translate(200px) rotate(-0deg);">
+                <a href="library.html"><img src="images/library.png" alt="Library"></a>
+                <div class="note-label">Library</div>
+            </div>
+
+            <div class="note" style="transform: rotate(60deg) translate(200px) rotate(-60deg);">
+                <a href="highschool.html"><img src="images/highschool.png" alt="High School"></a>
+                <div class="note-label">High School</div>
+            </div>
+
+            <div class="note" style="transform: rotate(120deg) translate(200px) rotate(-120deg);">
+                <a href="chrysanthemum.html"><img src="images/chrysanthemum.png" alt="Chrysanthemum"></a>
+                <div class="note-label">Chrysanthemum</div>
+            </div>
+
+            <div class="note" style="transform: rotate(180deg) translate(200px) rotate(-180deg);">
+                <a href="controller.html"><img src="images/controller.png" alt="Controller"></a>
+                <div class="note-label">Controller</div>
+            </div>
+
+            <div class="note" style="transform: rotate(240deg) translate(200px) rotate(-240deg);">
+                <a href="hello_world.html"><img src="images/helloworld.png" alt="Hello World"></a>
+                <div class="note-label">Hello World</div>
+            </div>
+
+            <div class="note" style="transform: rotate(300deg) translate(200px) rotate(-300deg);">
+                <a href="my_world.html"><img src="images/myworld.png" alt="My World"></a>
+                <div class="note-label">My World</div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Click on a note to explore its content</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add subtle animation to notes
+        document.addEventListener('DOMContentLoaded', function () {
+            const notes = document.querySelectorAll('.note');
+
+            notes.forEach(note => {
+                note.addEventListener('mouseenter', function () {
+                    this.style.transform = this.style.transform.replace('scale(1)', 'scale(1.2)');
+                });
+
+                note.addEventListener('mouseleave', function () {
+                    this.style.transform = this.style.transform.replace('scale(1.2)', 'scale(1)');
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
