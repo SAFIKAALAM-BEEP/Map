@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Musical Notes</title>
+    <title>HONS 3011X_Assignment2_SAlam</title>
     <style>
         * {
             margin: 0;
@@ -47,114 +47,185 @@
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 3rem;
             text-align: center;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
-        .notes-circle {
+        /* Web container */
+        .web-container {
             position: relative;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            width: 700px;
+            height: 700px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
+        /* Connection lines */
+        .connection {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.2);
+            transform-origin: 0 0;
+            z-index: 1;
+        }
+
+        /* Note icons */
+        .note {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            z-index: 2;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .note:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
+            border-color: rgba(255, 255, 255, 0.9);
+            z-index: 3;
+        }
+
+        .note img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .note:hover img {
+            transform: scale(1.1);
+        }
+
+        .note-placeholder {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        /* Center note */
         .center-note {
-            width: 80px;
-            height: 80px;
-            background-color: #fff;
+            width: 140px;
+            height: 140px;
+            background: #fff;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             color: #000;
             font-weight: bold;
-            z-index: 10;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+            z-index: 4;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+            border: 4px solid rgba(255, 255, 255, 0.9);
         }
 
-        .note {
-            position: absolute;
-            width: 70px;
-            height: 70px;
-            background-color: #fff;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transform-origin: 250px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        /* Individual note positions */
+        .library {
+            top: 50px;
+            left: 290px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
         }
 
-        .note:hover {
-            transform: scale(1.2);
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.9);
+        .highschool {
+            top: 120px;
+            left: 500px;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
         }
 
-        .note img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
+        .chrysanthemum {
+            top: 300px;
+            left: 550px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
         }
 
-        .note-placeholder {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            font-size: 0.8rem;
-            text-align: center;
-            padding: 5px;
+        .controller {
+            top: 480px;
+            left: 500px;
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
         }
 
-        /* Position notes in a circle */
-        .note:nth-child(2) {
-            transform: rotate(0deg) translate(200px) rotate(0deg);
+        .hello_world {
+            top: 550px;
+            left: 290px;
+            background: linear-gradient(135deg, #fa709a, #fee140);
         }
 
-        .note:nth-child(3) {
-            transform: rotate(45deg) translate(200px) rotate(-45deg);
+        .my_world {
+            top: 480px;
+            left: 80px;
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
         }
 
-        .note:nth-child(4) {
-            transform: rotate(90deg) translate(200px) rotate(-90deg);
-        }
-
-        .note:nth-child(5) {
-            transform: rotate(135deg) translate(200px) rotate(-135deg);
-        }
-
-        .note:nth-child(6) {
-            transform: rotate(180deg) translate(200px) rotate(-180deg);
-        }
-
-        .note:nth-child(7) {
-            transform: rotate(225deg) translate(200px) rotate(-225deg);
-        }
-
-        .note:nth-child(8) {
-            transform: rotate(270deg) translate(200px) rotate(-270deg);
-        }
-
-        .note:nth-child(9) {
-            transform: rotate(315deg) translate(200px) rotate(-315deg);
+        .home {
+            top: 300px;
+            left: 30px;
+            background: linear-gradient(135deg, #d299c2, #fef9d7);
         }
 
         footer {
             margin-top: 3rem;
             text-align: center;
             opacity: 0.7;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .web-container {
+                width: 500px;
+                height: 500px;
+            }
+
+            .note {
+                width: 90px;
+                height: 90px;
+            }
+
+            .center-note {
+                width: 110px;
+                height: 110px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .web-container {
+                width: 350px;
+                height: 350px;
+            }
+
+            .note {
+                width: 70px;
+                height: 70px;
+            }
+
+            .center-note {
+                width: 90px;
+                height: 90px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -163,37 +234,48 @@
     <div class="staff"></div>
 
     <div class="container">
-        <h1>Musical Notes</h1>
+        <h1>HONS 3011X_Assignment2_SAlam</h1>
 
-        <div class="notes-circle">
+        <div class="web-container">
+            <!-- Connection lines will be drawn by JavaScript -->
+
+            <!-- Center note -->
             <div class="center-note">HOME</div>
 
-            <a href="library.html" class="note">
-                <div class="note-placeholder">Library</div>
+            <!-- Outer notes -->
+            <a href="library.html" class="note library">
+                <img src="images/library.png" alt="Library"
+                    onerror="this.parentElement.innerHTML='<div class=\'note-placeholder\'>Library</div>'">
             </a>
 
-            <a href="highschool.html" class="note">
-                <div class="note-placeholder">High School</div>
+            <a href="highschool.html" class="note highschool">
+                <img src="images/highschool.png" alt="High School"
+                    onerror="this.parentElement.innerHTML='<div class=\'note-placeholder\'>High School</div>'">
             </a>
 
-            <a href="chrysanthemum.html" class="note">
-                <div class="note-placeholder">Chrysanthemum</div>
+            <a href="chrysanthemum.html" class="note chrysanthemum">
+                <img src="images/chrysanthemum.png" alt="Chrysanthemum"
+                    onerror="this.parentElement.innerHTML='<div class=\'note-placeholder\'>Chrysanthemum</div>'">
             </a>
 
-            <a href="controller.html" class="note">
-                <div class="note-placeholder">Controller</div>
+            <a href="controller.html" class="note controller">
+                <img src="images/controller.png" alt="Controller"
+                    onerror="this.parentElement.innerHTML='<div class=\'note-placeholder\'>Controller</div>'">
             </a>
 
-            <a href="hello_world.html" class="note">
-                <div class="note-placeholder">Hello World</div>
+            <a href="hello_world.html" class="note hello_world">
+                <img src="images/hello_world.png" alt="Hello World"
+                    onerror="this.parentElement.innerHTML='<div class=\'note-placeholder\'>Hello World</div>'">
             </a>
 
-            <a href="my_world.html" class="note">
-                <div class="note-placeholder">My World</div>
+            <a href="my_world.html" class="note my_world">
+                <img src="images/my_world.png" alt="My World"
+                    onerror="this.parentElement.innerHTML='<div class=\'note-placeholder\'>My World</div>'">
             </a>
 
-            <a href="home.html" class="note">
-                <div class="note-placeholder">Home</div>
+            <a href="home.html" class="note home">
+                <img src="images/home.png" alt="Home"
+                    onerror="this.parentElement.innerHTML='<div class=\'note-placeholder\'>Home</div>'">
             </a>
         </div>
 
@@ -201,6 +283,98 @@
             <p>Click on a note to explore</p>
         </footer>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const webContainer = document.querySelector('.web-container');
+            const centerNote = document.querySelector('.center-note');
+            const outerNotes = document.querySelectorAll('.note');
+
+            // Get center position
+            const centerRect = centerNote.getBoundingClientRect();
+            const containerRect = webContainer.getBoundingClientRect();
+
+            const centerX = centerRect.left - containerRect.left + centerRect.width / 2;
+            const centerY = centerRect.top - containerRect.top + centerRect.height / 2;
+
+            // Create connections from center to each outer note
+            outerNotes.forEach(note => {
+                const noteRect = note.getBoundingClientRect();
+                const noteX = noteRect.left - containerRect.left + noteRect.width / 2;
+                const noteY = noteRect.top - containerRect.top + noteRect.height / 2;
+
+                // Calculate distance and angle
+                const dx = noteX - centerX;
+                const dy = noteY - centerY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+                // Create connection line
+                const connection = document.createElement('div');
+                connection.className = 'connection';
+                connection.style.width = distance + 'px';
+                connection.style.height = '2px';
+                connection.style.left = centerX + 'px';
+                connection.style.top = centerY + 'px';
+                connection.style.transform = `rotate(${angle}deg)`;
+
+                webContainer.appendChild(connection);
+            });
+
+            // Add connections between outer notes (creating web pattern)
+            for (let i = 0; i < outerNotes.length; i++) {
+                for (let j = i + 1; j < outerNotes.length; j++) {
+                    if (Math.random() > 0.4) { // Randomly connect some notes
+                        const note1 = outerNotes[i];
+                        const note2 = outerNotes[j];
+
+                        const rect1 = note1.getBoundingClientRect();
+                        const rect2 = note2.getBoundingClientRect();
+
+                        const x1 = rect1.left - containerRect.left + rect1.width / 2;
+                        const y1 = rect1.top - containerRect.top + rect1.height / 2;
+                        const x2 = rect2.left - containerRect.left + rect2.width / 2;
+                        const y2 = rect2.top - containerRect.top + rect2.height / 2;
+
+                        const dx = x2 - x1;
+                        const dy = y2 - y1;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+                        const connection = document.createElement('div');
+                        connection.className = 'connection';
+                        connection.style.width = distance + 'px';
+                        connection.style.height = '1px';
+                        connection.style.left = x1 + 'px';
+                        connection.style.top = y1 + 'px';
+                        connection.style.transform = `rotate(${angle}deg)`;
+                        connection.style.opacity = '0.1';
+
+                        webContainer.appendChild(connection);
+                    }
+                }
+            }
+
+            // Add hover effects for connections
+            outerNotes.forEach(note => {
+                note.addEventListener('mouseenter', function () {
+                    const connections = document.querySelectorAll('.connection');
+                    connections.forEach(conn => {
+                        conn.style.background = 'rgba(255, 255, 255, 0.4)';
+                        conn.style.height = '3px';
+                    });
+                });
+
+                note.addEventListener('mouseleave', function () {
+                    const connections = document.querySelectorAll('.connection');
+                    connections.forEach(conn => {
+                        conn.style.background = 'rgba(255, 255, 255, 0.2)';
+                        conn.style.height = conn.style.opacity === '0.1' ? '1px' : '2px';
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const pageVideoMap = {
         'library.html': 'XuVT7RJijAo', // Example video ID
         'highschool.html': '_fIk-MHq-dU',
-        'chrysanthemum.html': 'V9iFDPYubUbE',
+        'chrysanthemum.html': '9iFDPYubUbE',
         'controller.html': 'JRlCyZRU34I',
         'hello_world.html': 'Yw6u6YkTgQ4',
         'my_world.html': 'Z0CzWoj8i5g',
