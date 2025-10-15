@@ -152,3 +152,45 @@ pre code {
 .back-btn:hover {
     background: rgba(255, 255, 255, 0.3);
 }
+
+/* Enhanced music player styles */
+.music-player {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+}
+
+.play-btn,
+.pause-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.2rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.play-btn:hover,
+.pause-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Loading state */
+.play-btn.loading,
+.pause-btn.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
