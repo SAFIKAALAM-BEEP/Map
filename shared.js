@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'library.html': 'XuVT7RJijAo', // Example video ID
         'highschool.html': '_fIk-MHq-dU',
         'chrysanthemum.html': '9iFDPYubUbE',
-        'controller.html': '7t4qnH8tpd4',
+        'controller.html': 'RDzY5vtGvhduc',
         'hello_world.html': 'Yw6u6YkTgQ4',
         'my_world.html': 'Z0CzWoj8i5g',
         'home.html': 'yS2KyK3pqj4'
